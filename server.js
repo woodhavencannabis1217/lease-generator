@@ -64,68 +64,60 @@ app.post('/api/generate-lease', async (req, res) => {
       }
     }
 
-    // Add strikethrough lines for selected paragraphs
+    // White-out (remove) selected clauses by covering text with white rectangles
     if (data.strikethroughs && data.strikethroughs.length > 0) {
-      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
       const pages = pdfDoc.getPages();
 
-      // Strikethrough coordinates mapping - these are approximate y-ranges on each page
-      // Based on the standard NY apartment lease template layout
-      const strikethroughMap = {
+      // Each entry defines white rectangles to cover the clause text
+      // { page, rects: [{ x, y, width, height }] }
+      const whiteoutMap = {
         // Page 1 (index 0)
-        'p1_spouse': { page: 0, lines: [{ y: 267, x1: 245, x2: 420 }] }, // "and Tenant's spouse and children"
-        'p3_additional_rent': { page: 0, lines: [
-          { y: 165, x1: 72, x2: 540 },
-          { y: 155, x1: 72, x2: 540 },
-          { y: 145, x1: 72, x2: 540 },
-          { y: 135, x1: 72, x2: 540 },
-          { y: 125, x1: 72, x2: 540 },
-          { y: 115, x1: 72, x2: 540 },
+        'p1_spouse': { page: 0, rects: [
+          { x: 243, y: 260, width: 180, height: 14 }  // "and Tenant's spouse and children"
+        ]},
+        'p3_additional_rent': { page: 0, rects: [
+          { x: 70, y: 108, width: 472, height: 72 }  // Entire Additional Rent paragraph
         ]},
         // Page 2 (index 1)
-        'p6_utilities': { page: 1, lines: [
-          { y: 622, x1: 72, x2: 540 },
-          { y: 612, x1: 72, x2: 540 },
-          { y: 602, x1: 72, x2: 540 },
+        'p6_utilities': { page: 1, rects: [
+          { x: 70, y: 595, width: 472, height: 36 }  // "water, telephone and any other utilities" lines
         ]},
-        'p6_appliances': { page: 1, lines: [
-          { y: 570, x1: 72, x2: 540 },
-          { y: 560, x1: 72, x2: 540 },
+        'p6_appliances': { page: 1, rects: [
+          { x: 70, y: 553, width: 472, height: 26 }  // Appliances (dishwasher, washer, dryer)
         ]},
-        'p10_pets': { page: 1, lines: [{ y: 388, x1: 165, x2: 200 }] }, // strike "(shall)"
+        'p10_pets': { page: 1, rects: [
+          { x: 163, y: 382, width: 38, height: 14 }  // "(shall)"
+        ]},
         // Page 3 (index 2)
-        'p21c_floorcovering': { page: 2, lines: [
-          { y: 538, x1: 72, x2: 540 },
-          { y: 528, x1: 72, x2: 540 },
+        'p21c_floorcovering': { page: 2, rects: [
+          { x: 70, y: 522, width: 472, height: 26 }  // 70% floor covering rule
         ]},
-        'p21i_elevator': { page: 2, lines: [
-          { y: 418, x1: 72, x2: 540 },
-          { y: 408, x1: 72, x2: 540 },
+        'p21i_elevator': { page: 2, rects: [
+          { x: 70, y: 402, width: 472, height: 26 }  // Elevator rules
         ]},
-        'p21l_laundry': { page: 2, lines: [
-          { y: 368, x1: 72, x2: 540 },
-          { y: 358, x1: 72, x2: 540 },
+        'p21l_laundry': { page: 2, rects: [
+          { x: 70, y: 352, width: 472, height: 26 }  // Laundry machine rules
         ]},
-        'p21m_windows': { page: 2, lines: [
-          { y: 338, x1: 72, x2: 540 },
-          { y: 328, x1: 72, x2: 540 },
+        'p21m_windows': { page: 2, rects: [
+          { x: 70, y: 322, width: 472, height: 26 }  // Exterior window cleaning
         ]},
-        'p21n_parking': { page: 2, lines: [
-          { y: 308, x1: 72, x2: 540 },
-          { y: 298, x1: 72, x2: 540 },
+        'p21n_parking': { page: 2, rects: [
+          { x: 70, y: 292, width: 472, height: 26 }  // Parking/tow rules
         ]},
       };
 
       for (const key of data.strikethroughs) {
-        const info = strikethroughMap[key];
+        const info = whiteoutMap[key];
         if (info) {
           const page = pages[info.page];
-          for (const line of info.lines) {
-            page.drawLine({
-              start: { x: line.x1, y: line.y },
-              end: { x: line.x2, y: line.y },
-              thickness: 1,
-              color: rgb(1, 0, 0), // red strikethrough
+          for (const rect of info.rects) {
+            page.drawRectangle({
+              x: rect.x,
+              y: rect.y,
+              width: rect.width,
+              height: rect.height,
+              color: rgb(1, 1, 1), // white fill to cover text
+              borderWidth: 0,
             });
           }
         }
