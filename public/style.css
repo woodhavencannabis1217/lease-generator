@@ -1,0 +1,294 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #1a3a5c;
+  --blue-light: #2a5a8c;
+  --blue-bg: #eef3f8;
+  --green: #1a5c2e;
+  --red: #d63031;
+  --gray-100: #f7f8fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--gray-100);
+  color: var(--gray-900);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+header h1 {
+  font-size: 26px;
+  color: var(--blue);
+}
+
+.subtitle {
+  color: var(--gray-600);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Sections */
+.section {
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+
+.section h2 {
+  font-size: 17px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-num {
+  width: 28px;
+  height: 28px;
+  background: var(--blue);
+  color: white;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.section-desc {
+  font-size: 13px;
+  color: var(--gray-600);
+  margin-bottom: 14px;
+  margin-top: -8px;
+}
+
+/* Field Grid */
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+.field label, .section > .field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 4px;
+}
+
+input[type="text"], input[type="email"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--gray-300);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  border-color: var(--blue);
+}
+
+input[readonly] {
+  background: var(--gray-100);
+  color: var(--gray-600);
+}
+
+/* Checkbox Grid */
+.checkbox-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.check-item:hover {
+  background: var(--gray-100);
+}
+
+.check-item input[type="checkbox"] {
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--red);
+  flex-shrink: 0;
+}
+
+.check-label {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Amendments */
+#amendments-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.amendment-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.amendment-num {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--gray-600);
+  padding-top: 8px;
+  min-width: 20px;
+}
+
+.amendment-text {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1.5px solid var(--gray-300);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+  line-height: 1.5;
+}
+
+.amendment-text:focus {
+  border-color: var(--blue);
+}
+
+.btn-remove-amendment {
+  background: none;
+  border: none;
+  color: var(--red);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 4px 8px;
+  margin-top: 4px;
+  border-radius: 4px;
+}
+
+.btn-remove-amendment:hover {
+  background: #fee;
+}
+
+.btn-add-amendment {
+  background: none;
+  border: 1.5px dashed var(--gray-300);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--blue);
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: all 0.15s;
+}
+
+.btn-add-amendment:hover {
+  border-color: var(--blue);
+  background: var(--blue-bg);
+}
+
+/* Generate Buttons */
+.generate-buttons {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-row {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-generate {
+  padding: 14px 24px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.btn-generate.primary {
+  background: var(--blue);
+  color: white;
+}
+
+.btn-generate.primary:hover {
+  background: var(--blue-light);
+}
+
+.btn-generate.secondary {
+  background: white;
+  color: var(--blue);
+  border: 2px solid var(--blue);
+}
+
+.btn-generate.secondary:hover {
+  background: var(--blue-bg);
+}
+
+.btn-generate:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+  .btn-row {
+    flex-direction: column;
+  }
+  header h1 {
+    font-size: 22px;
+  }
+}

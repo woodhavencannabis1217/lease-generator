@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NY Lease Generator - Chris Li</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>NY Apartment Lease Generator</h1>
+      <p class="subtitle">Fill in the details below to auto-generate your lease agreement and addendum</p>
+    </header>
+
+    <form id="lease-form">
+      <!-- SECTION: Property -->
+      <div class="section">
+        <h2><span class="section-num">1</span> Property Information</h2>
+        <div class="field-grid">
+          <div class="field full">
+            <label for="premises">Premises (Full Address) *</label>
+            <input type="text" id="premises" placeholder="200 Jericho Tpke Mineola NY 11501" required>
+          </div>
+          <div class="field">
+            <label for="unit">Unit / Apt</label>
+            <input type="text" id="unit" placeholder="2nd Fl Apt A">
+          </div>
+          <div class="field">
+            <label for="leaseTerm">Lease Term</label>
+            <input type="text" id="leaseTerm" value="1 Year" placeholder="1 Year">
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: Parties -->
+      <div class="section">
+        <h2><span class="section-num">2</span> Parties</h2>
+        <div class="field-grid">
+          <div class="field">
+            <label for="landlord1">Landlord Name *</label>
+            <input type="text" id="landlord1" placeholder="J & L Management of New York LLC" required>
+          </div>
+          <div class="field">
+            <label for="landlord2">Landlord 2 (optional)</label>
+            <input type="text" id="landlord2" placeholder="">
+          </div>
+          <div class="field full">
+            <label for="landlordAddress">Landlord Address (for addendum)</label>
+            <input type="text" id="landlordAddress" placeholder="151-70 24th Rd, Whitestone, NY 11357">
+          </div>
+          <div class="field">
+            <label for="tenant1">Tenant Name *</label>
+            <input type="text" id="tenant1" placeholder="Ariana Cabral" required>
+          </div>
+          <div class="field">
+            <label for="tenant2">Tenant 2 (optional)</label>
+            <input type="text" id="tenant2" placeholder="">
+          </div>
+          <div class="field full">
+            <label for="tenantAddress">Tenant Address (for addendum)</label>
+            <input type="text" id="tenantAddress" placeholder="53 Jefferson St, Franklin Square, NY 11010">
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: Dates & Financials -->
+      <div class="section">
+        <h2><span class="section-num">3</span> Dates & Financials</h2>
+        <div class="field-grid">
+          <div class="field">
+            <label for="dateOfLease">Date of Lease</label>
+            <input type="text" id="dateOfLease" placeholder="MM/DD/YYYY">
+          </div>
+          <div class="field">
+            <label for="commencementDate">Commencement Date *</label>
+            <input type="text" id="commencementDate" placeholder="6/1/2026" required>
+          </div>
+          <div class="field">
+            <label for="terminationDate">Termination Date *</label>
+            <input type="text" id="terminationDate" placeholder="5/31/2027" required>
+          </div>
+          <div class="field">
+            <label for="monthlyRent">Monthly Rent *</label>
+            <input type="text" id="monthlyRent" placeholder="$2,000" required>
+          </div>
+          <div class="field">
+            <label for="annualRent">Annual Rent (auto-calculated)</label>
+            <input type="text" id="annualRent" placeholder="$24,000" readonly>
+          </div>
+          <div class="field">
+            <label for="securityDeposit">Security Deposit</label>
+            <input type="text" id="securityDeposit" placeholder="$2,000">
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: Broker & Agent -->
+      <div class="section">
+        <h2><span class="section-num">4</span> Broker & Agent</h2>
+        <div class="field-grid">
+          <div class="field">
+            <label for="brokerName">Broker Name (Paragraph 33)</label>
+            <input type="text" id="brokerName" value="Chris (Xiongwei) Li" placeholder="Chris (Xiongwei) Li">
+          </div>
+          <div class="field">
+            <label for="agentName">Agent Print Name (Signature Page)</label>
+            <input type="text" id="agentName" value="Chris Li" placeholder="Chris Li">
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: Strikethroughs -->
+      <div class="section">
+        <h2><span class="section-num">5</span> Cross-Out Clauses</h2>
+        <p class="section-desc">Check the paragraphs you want to cross out (red strikethrough lines will be added)</p>
+        <div class="checkbox-grid">
+          <label class="check-item">
+            <input type="checkbox" name="strikethrough" value="p1_spouse" checked>
+            <span class="check-label">P1 - "and Tenant's spouse and children"</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="strikethrough" value="p3_additional_rent" checked>
+            <span class="check-label">P3 - Additional Rent (insurance premiums clause)</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="strikethrough" value="p6_utilities" checked>
+            <span class="check-label">P6 - Services & Utilities (water, telephone, etc.)</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="strikethrough" value="p6_appliances" checked>
+            <span class="check-label">P6 - Appliances (dishwasher, washer, dryer)</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="strikethrough" value="p10_pets">
+            <span class="check-label">P10 - Pets "(shall)" - strike to allow no pets</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="strikethrough" value="p21c_floorcovering" checked>
+            <span class="check-label">P21(c) - 70% floor covering rule</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="strikethrough" value="p21i_elevator" checked>
+            <span class="check-label">P21(i) - Elevator rules</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="strikethrough" value="p21l_laundry" checked>
+            <span class="check-label">P21(l) - Laundry machine rules</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="strikethrough" value="p21m_windows" checked>
+            <span class="check-label">P21(m) - Exterior window cleaning</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="strikethrough" value="p21n_parking" checked>
+            <span class="check-label">P21(n) - Parking/tow rules</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- SECTION: Addendum -->
+      <div class="section">
+        <h2><span class="section-num">6</span> Lease Addendum Amendments</h2>
+        <p class="section-desc">Your standard addendum items are pre-filled. Edit or remove as needed.</p>
+        <div class="field full">
+          <label>Addendum Date</label>
+          <input type="text" id="addendumDate" placeholder="Same as lease date">
+        </div>
+        <div id="amendments-container">
+          <div class="amendment-row">
+            <span class="amendment-num">1.</span>
+            <textarea class="amendment-text" rows="2">Monthly rent increases by 3% annually, effective on each anniversary of the lease commencement date.</textarea>
+            <button type="button" class="btn-remove-amendment" onclick="removeAmendment(this)">&times;</button>
+          </div>
+          <div class="amendment-row">
+            <span class="amendment-num">2.</span>
+            <textarea class="amendment-text" rows="2">Security deposit forfeited if tenant moves out without one month's notice or before lease term is completed.</textarea>
+            <button type="button" class="btn-remove-amendment" onclick="removeAmendment(this)">&times;</button>
+          </div>
+          <div class="amendment-row">
+            <span class="amendment-num">3.</span>
+            <textarea class="amendment-text" rows="2">Smoking will result in loss of security deposit.</textarea>
+            <button type="button" class="btn-remove-amendment" onclick="removeAmendment(this)">&times;</button>
+          </div>
+          <div class="amendment-row">
+            <span class="amendment-num">4.</span>
+            <textarea class="amendment-text" rows="2">Late fee of $50 if rent not received by the 3rd of each month; additional $100 if not received by the 16th.</textarea>
+            <button type="button" class="btn-remove-amendment" onclick="removeAmendment(this)">&times;</button>
+          </div>
+          <div class="amendment-row">
+            <span class="amendment-num">5.</span>
+            <textarea class="amendment-text" rows="2">Holdover penalty: $200 per day (or portion of a day) if tenant stays past lease ending date.</textarea>
+            <button type="button" class="btn-remove-amendment" onclick="removeAmendment(this)">&times;</button>
+          </div>
+          <div class="amendment-row">
+            <span class="amendment-num">6.</span>
+            <textarea class="amendment-text" rows="2">Tenant responsible for clogging of sinks, toilets, or drains caused by misuse/negligence; $200 service fee per incident if Landlord arranges repairs.</textarea>
+            <button type="button" class="btn-remove-amendment" onclick="removeAmendment(this)">&times;</button>
+          </div>
+          <div class="amendment-row">
+            <span class="amendment-num">7.</span>
+            <textarea class="amendment-text" rows="2">Tenant pays additional $50 toward security deposit so total security deposit equals one month's rent; due on commencement date.</textarea>
+            <button type="button" class="btn-remove-amendment" onclick="removeAmendment(this)">&times;</button>
+          </div>
+        </div>
+        <button type="button" class="btn-add-amendment" onclick="addAmendment()">+ Add Amendment</button>
+      </div>
+
+      <!-- GENERATE BUTTONS -->
+      <div class="generate-buttons">
+        <button type="button" class="btn-generate primary" onclick="generateBoth()">
+          Generate Lease + Addendum (Combined PDF)
+        </button>
+        <div class="btn-row">
+          <button type="button" class="btn-generate secondary" onclick="generateLease()">
+            Lease Only
+          </button>
+          <button type="button" class="btn-generate secondary" onclick="generateAddendum()">
+            Addendum Only
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

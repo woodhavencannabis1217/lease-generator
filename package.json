@@ -1,0 +1,14 @@
+{
+  "name": "lease-generator",
+  "version": "1.0.0",
+  "description": "NY Apartment Lease Agreement & Addendum Generator",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "pdf-lib": "^1.17.1"
+  }
+}
